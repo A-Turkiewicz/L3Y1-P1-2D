@@ -5,12 +5,14 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("UI")]
     public TMP_Text timerTxt;
     public float timer;
+    public Slider healthSlider;
 
     [Header("Health")]
     public int maxHealth;
@@ -37,6 +39,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        healthSlider.maxValue = maxHealth;
+
         startPos = transform.position;
 
         currentHealth = maxHealth;
@@ -73,6 +77,8 @@ public class PlayerController : MonoBehaviour
     }
     void Health()
     {
+        healthSlider.value = currentHealth;
+        
         if (currentHealth <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
